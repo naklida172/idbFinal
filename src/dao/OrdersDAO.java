@@ -1,44 +1,61 @@
 package dao;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import model.Orders;
 
 public class OrdersDAO {
+    private Connection conn;
 
-    public static void createOrders(Connection conn, String name) throws SQLException {
-        String sql = "INSERT INTO Orders (name) VALUES (?)";
+    public OrdersDAO(Connection conn) {
+        this.conn = conn;
+    }
+
+    public void createOrder(Orders order) throws SQLException {
+        String sql = "INSERT INTO orders (customerid, orderdate, totalamount) VALUES (?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, name);
+            pstmt.setInt(1, order.getCustomerId());
+            pstmt.setDate(2, order.getOrderDate());
+            pstmt.setDouble(3, order.getTotalAmount());
             pstmt.executeUpdate();
-            System.out.println("Orders created.");
         }
     }
 
-    public static void readOrderss(Connection conn) throws SQLException {
-        String sql = "SELECT * FROM Orderss";
+    public List<Orders> readAllOrders() throws SQLException {
+        List<Orders> orders = new ArrayList<>();
+        String sql = "SELECT * FROM orders";
         try (Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                System.out.println("ID: " + rs.getInt("id") + ", Name: " + rs.getString("name"));
+                Orders order = new Orders(
+                    rs.getInt("orderid"),
+                    rs.getInt("customerid"),
+                    rs.getDate("orderdate"),
+                    rs.getDouble("totalamount")
+                );
+                orders.add(order);
             }
         }
+        return orders;
     }
 
-    public static void updateOrders(Connection conn, int id, String newName) throws SQLException {
-        String sql = "UPDATE Orderss SET name = ? WHERE id = ?";
+    public void updateOrder(Orders order) throws SQLException {
+        String sql = "UPDATE orders SET customerid = ?, orderdate = ?, totalamount = ? WHERE orderid = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, newName);
-            pstmt.setInt(2, id);
+            pstmt.setInt(1, order.getCustomerId());
+            pstmt.setDate(2, order.getOrderDate());
+            pstmt.setDouble(3, order.getTotalAmount());
+            pstmt.setInt(4, order.getOrderId());
             pstmt.executeUpdate();
-            System.out.println("Orders updated.");
         }
     }
 
-    public static void deleteOrders(Connection conn, int id) throws SQLException {
-        String sql = "DELETE FROM Orderss WHERE id = ?";
+    public void deleteOrder(int orderId) throws SQLException {
+        String sql = "DELETE FROM orders WHERE orderid = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, orderId);
             pstmt.executeUpdate();
-            System.out.println("Orders deleted.");
         }
     }
 }

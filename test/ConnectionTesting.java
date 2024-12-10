@@ -2,7 +2,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class App {
+public class ConnectionTesting {
     public static void main(String[] args) {
         String url = "jdbc:postgresql://localhost:5432/postgres";
         String user = "postgres";
@@ -21,7 +21,6 @@ public class App {
             e.printStackTrace();
         } finally {
             try {
-                // Close the connection if it was opened
                 if (conn != null) {
                     conn.close();
                 }

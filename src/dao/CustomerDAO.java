@@ -1,44 +1,61 @@
 package dao;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import model.Customer;
 
 public class CustomerDAO {
+    private Connection conn;
 
-    public static void createCustomer(Connection conn, String name) throws SQLException {
-        String sql = "INSERT INTO Customers (name) VALUES (?)";
+    public CustomerDAO(Connection conn) {
+        this.conn = conn;
+    }
+
+    public void createCustomer(Customer customer) throws SQLException {
+        String sql = "INSERT INTO customer (name, email, phone) VALUES (?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, name);
+            pstmt.setString(1, customer.getName());
+            pstmt.setString(2, customer.getEmail());
+            pstmt.setString(3, customer.getPhone());
             pstmt.executeUpdate();
-            System.out.println("Customer created.");
         }
     }
 
-    public static void readCustomers(Connection conn) throws SQLException {
-        String sql = "SELECT * FROM Customers";
+    public List<Customer> readAllCustomers() throws SQLException {
+        List<Customer> customers = new ArrayList<>();
+        String sql = "SELECT * FROM customer";
         try (Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                System.out.println("ID: " + rs.getInt("id") + ", Name: " + rs.getString("name"));
+                Customer customer = new Customer(
+                    rs.getInt("customerid"),
+                    rs.getString("name"),
+                    rs.getString("email"),
+                    rs.getString("phone")
+                );
+                customers.add(customer);
             }
         }
+        return customers;
     }
 
-    public static void updateCustomer(Connection conn, int id, String newName) throws SQLException {
-        String sql = "UPDATE Customers SET name = ? WHERE id = ?";
+    public void updateCustomer(Customer customer) throws SQLException {
+        String sql = "UPDATE customer SET name = ?, email = ?, phone = ? WHERE customerid = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, newName);
-            pstmt.setInt(2, id);
+            pstmt.setString(1, customer.getName());
+            pstmt.setString(2, customer.getEmail());
+            pstmt.setString(3, customer.getPhone());
+            pstmt.setInt(4, customer.getCustomerId());
             pstmt.executeUpdate();
-            System.out.println("Customer updated.");
         }
     }
 
-    public static void deleteCustomer(Connection conn, int id) throws SQLException {
-        String sql = "DELETE FROM Customers WHERE id = ?";
+    public void deleteCustomer(int customerId) throws SQLException {
+        String sql = "DELETE FROM customer WHERE customerid = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, customerId);
             pstmt.executeUpdate();
-            System.out.println("Customer deleted.");
         }
     }
 }
