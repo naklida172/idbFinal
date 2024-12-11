@@ -42,9 +42,25 @@ public class Orders {
         this.totalAmount = totalAmount;
     }
 
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "order Id=" + orderId +
+                ", customer Id='" + customerId + '\'' +
+                ", order Date='" + orderDate + '\'' +
+                ", total Amount='" + totalAmount + '\'' +
+                '}';
+    }
+
     // Constructor
+    public Orders(int customerId, Date orderDate, double totalAmount) {
+        this.customerId = customerId;
+        this.orderDate = orderDate;
+        this.totalAmount = totalAmount;
+    }
+
     public Orders(int orderId, int customerId, Date orderDate, double totalAmount) {
-        this.orderId = orderId;
+        this.orderId=orderId;
         this.customerId = customerId;
         this.orderDate = orderDate;
         this.totalAmount = totalAmount;

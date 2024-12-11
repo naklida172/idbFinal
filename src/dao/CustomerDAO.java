@@ -29,7 +29,7 @@ public class CustomerDAO {
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 Customer customer = new Customer(
-                    rs.getInt("customerid"),
+                    rs.getInt("customerId"),
                     rs.getString("name"),
                     rs.getString("email"),
                     rs.getString("phone")
@@ -40,13 +40,13 @@ public class CustomerDAO {
         return customers;
     }
 
-    public void updateCustomer(Customer customer) throws SQLException {
+    public void updateCustomer(Customer customer, int customerid) throws SQLException {
         String sql = "UPDATE customer SET name = ?, email = ?, phone = ? WHERE customerid = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, customer.getName());
             pstmt.setString(2, customer.getEmail());
             pstmt.setString(3, customer.getPhone());
-            pstmt.setInt(4, customer.getCustomerId());
+            pstmt.setInt(4, customerid);
             pstmt.executeUpdate();
         }
     }
@@ -58,4 +58,18 @@ public class CustomerDAO {
             pstmt.executeUpdate();
         }
     }
+
+    public boolean doesCustomerExist(int customerId) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM customer WHERE customerid = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, customerId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        }
+        return false;
+    }
+
 }

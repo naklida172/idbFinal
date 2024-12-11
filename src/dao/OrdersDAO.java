@@ -29,7 +29,6 @@ public class OrdersDAO {
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 Orders order = new Orders(
-                    rs.getInt("orderid"),
                     rs.getInt("customerid"),
                     rs.getDate("orderdate"),
                     rs.getDouble("totalamount")
@@ -40,13 +39,13 @@ public class OrdersDAO {
         return orders;
     }
 
-    public void updateOrder(Orders order) throws SQLException {
+    public void updateOrder(Orders order, int orderid) throws SQLException {
         String sql = "UPDATE orders SET customerid = ?, orderdate = ?, totalamount = ? WHERE orderid = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, order.getCustomerId());
             pstmt.setDate(2, order.getOrderDate());
             pstmt.setDouble(3, order.getTotalAmount());
-            pstmt.setInt(4, order.getOrderId());
+            pstmt.setInt(4, orderid);
             pstmt.executeUpdate();
         }
     }

@@ -40,12 +40,29 @@ public class Book {
         this.price = price;
     }
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookId=" + bookId +
+                ", title='" + title + '\'' +
+                ", genre='" + genre + '\'' +
+                ", price=" + price +
+                '}';
+    }
+
     // Constructors
-    public Book(int bookId, String title, String genre, double price) {
-        this.bookId = bookId;
+    public Book( String title, String genre, double price) {
         this.title = title;
         this.genre = genre;
         this.price = price;
     }
+
+    public Book(int bookID, String title, String genre, double price) {
+        this.bookId=bookID;
+        this.title = title;
+        this.genre = genre;
+        this.price = price;
+    }
+    
 
 }

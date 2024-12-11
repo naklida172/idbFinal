@@ -1,8 +1,4 @@
-
-import dao.AuthorDAO;
-import dao.BookDAO;
-import dao.CustomerDAO;
-import dao.OrdersDAO;
+import cli.CLI;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -17,10 +13,9 @@ public class App {
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
             if (conn != null) {
                 System.out.println("Connected to the database.");
-                AuthorDAO authorconn = new AuthorDAO(conn);
-                BookDAO bookconn = new BookDAO(conn);
-                CustomerDAO customerconn = new CustomerDAO(conn);
-                OrdersDAO ordersconn = new OrdersDAO(conn);
+                CLI cli = new CLI(conn);
+                cli.start();
+                
             } else {
                 System.out.println("Failed to connect to the database.");
             }

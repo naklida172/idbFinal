@@ -28,7 +28,7 @@ public class AuthorDAO {
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 Author author = new Author(
-                    rs.getInt("authorid"),
+                    rs.getInt("authorId"),
                     rs.getString("name"),
                     rs.getString("bio")
                 );
@@ -38,12 +38,12 @@ public class AuthorDAO {
         return authors;
     }
 
-    public void updateAuthor(Author author) throws SQLException {
+    public void updateAuthor(Author author, int authorid) throws SQLException {
         String sql = "UPDATE author SET name = ?, bio = ? WHERE authorid = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, author.getName());
             pstmt.setString(2, author.getBio());
-            pstmt.setInt(3, author.getAuthorId());
+            pstmt.setInt(3, authorid);
             pstmt.executeUpdate();
         }
     }
