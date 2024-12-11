@@ -27,7 +27,7 @@ public class CustomerCLI {
             System.out.println("5. Back to Main Menu");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -81,7 +81,7 @@ public class CustomerCLI {
     private void updateCustomer() {
         System.out.print("Enter customer ID to update: ");
         int customerId = scanner.nextInt();
-        scanner.nextLine();  // Consume newline
+        scanner.nextLine();
 
         System.out.print("Enter new name: ");
         String name = scanner.nextLine();
@@ -102,7 +102,7 @@ public class CustomerCLI {
     private void deleteCustomer() {
         System.out.print("Enter customer ID to delete: ");
         int customerId = scanner.nextInt();
-        scanner.nextLine();  // Consume newline
+        scanner.nextLine();
         try {
             customerDAO.deleteCustomer(customerId);
             System.out.println("Customer deleted successfully.");

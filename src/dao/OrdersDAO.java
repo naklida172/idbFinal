@@ -29,6 +29,7 @@ public class OrdersDAO {
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 Orders order = new Orders(
+                    rs.getInt("orderId"),
                     rs.getInt("customerid"),
                     rs.getDate("orderdate"),
                     rs.getDouble("totalamount")
@@ -57,6 +58,20 @@ public class OrdersDAO {
             pstmt.executeUpdate();
         }
     }
+
+    public boolean doesOrderExist(int orderId) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM orders WHERE orderid = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, orderId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        }
+        return false;
+    }
+
 }
 
 

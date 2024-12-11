@@ -55,4 +55,17 @@ public class AuthorDAO {
             pstmt.executeUpdate();
         }
     }
+
+    public boolean doesAuthorExist(int authorId) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM author WHERE authorid = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, authorId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        }
+        return false;
+    }
 }

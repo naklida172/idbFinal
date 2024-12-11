@@ -1,12 +1,11 @@
 package cli;
 
 import dao.AuthorDAO;
-import model.Author;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
+import model.Author;
 
 public class AuthorCLI {
 
@@ -28,7 +27,7 @@ public class AuthorCLI {
             System.out.println("5. Back to Main Menu");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -79,7 +78,7 @@ public class AuthorCLI {
     private void updateAuthor() {
         System.out.print("Enter author ID to update: ");
         int authorId = scanner.nextInt();
-        scanner.nextLine();  // Consume newline
+        scanner.nextLine();
 
         System.out.print("Enter new name: ");
         String name = scanner.nextLine();
@@ -98,7 +97,7 @@ public class AuthorCLI {
     private void deleteAuthor() {
         System.out.print("Enter author ID to delete: ");
         int authorId = scanner.nextInt();
-        scanner.nextLine();  // Consume newline
+        scanner.nextLine();
         try {
             authorDAO.deleteAuthor(authorId);
             System.out.println("Author deleted successfully.");

@@ -33,15 +33,15 @@ public class Author {
 
     @Override
     public String toString() {
-        return "Author{" +
-                "authorId=" + authorId +
-                ", name='" + name + '\'' +
-                ", bio='" + bio + '\'' +
-                '}';
+        return "Author{"
+                + "authorId=" + authorId
+                + ", name='" + name + '\''
+                + ", bio='" + bio + '\''
+                + '}';
     }
 
     // Constructor
-    public Author( String name, String bio) {
+    public Author(String name, String bio) {
         this.name = name;
         this.bio = bio;
     }

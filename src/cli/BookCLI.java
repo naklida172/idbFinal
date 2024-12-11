@@ -1,12 +1,11 @@
 package cli;
 
 import dao.BookDAO;
-import model.Book;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
+import model.Book;
 
 public class BookCLI {
 
@@ -28,7 +27,7 @@ public class BookCLI {
             System.out.println("5. Back to Main Menu");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -58,7 +57,7 @@ public class BookCLI {
         String genre = scanner.nextLine();
         System.out.print("Enter book price: ");
         double price = scanner.nextDouble();
-        scanner.nextLine();  // Consume newline
+        scanner.nextLine();
 
         Book book = new Book(title, genre, price);
         try {
@@ -84,7 +83,7 @@ public class BookCLI {
     private void updateBook() {
         System.out.print("Enter book ID to update: ");
         int bookId = scanner.nextInt();
-        scanner.nextLine();  // Consume newline
+        scanner.nextLine();
 
         System.out.print("Enter new title: ");
         String title = scanner.nextLine();
@@ -92,7 +91,7 @@ public class BookCLI {
         String genre = scanner.nextLine();
         System.out.print("Enter new price: ");
         double price = scanner.nextDouble();
-        scanner.nextLine();  // Consume newline
+        scanner.nextLine();
 
         Book book = new Book(title, genre, price);
         try {
@@ -107,7 +106,7 @@ public class BookCLI {
     private void deleteBook() {
         System.out.print("Enter book ID to delete: ");
         int bookId = scanner.nextInt();
-        scanner.nextLine();  // Consume newline
+        scanner.nextLine();
         try {
             bookDAO.deleteBook(bookId);
         } catch (SQLException e) {

@@ -1,6 +1,7 @@
 package model;
 
 public class BookAuthor {
+
     private int bookId;
     private int authorId;
 
@@ -24,5 +25,13 @@ public class BookAuthor {
 
     public void setAuthorId(int authorId) {
         this.authorId = authorId;
+    }
+
+    @Override
+    public String toString() {
+        return "BookAuthor{"
+                + "bookId=" + bookId
+                + ", authorId=" + authorId
+                + '}';
     }
 }

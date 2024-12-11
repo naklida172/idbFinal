@@ -6,6 +6,7 @@ import java.util.List;
 import model.Book;
 
 public class BookDAO {
+
     private Connection conn;
 
     public BookDAO(Connection conn) {
@@ -27,19 +28,17 @@ public class BookDAO {
             }
         }
     }
-        
 
     public List<Book> readAllBooks() throws SQLException {
         List<Book> books = new ArrayList<>();
         String sql = "SELECT * FROM book";
-        try (Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 Book book = new Book(
-                    rs.getInt("bookId"),
-                    rs.getString("title"),
-                    rs.getString("genre"),
-                    rs.getDouble("price")
+                        rs.getInt("bookId"),
+                        rs.getString("title"),
+                        rs.getString("genre"),
+                        rs.getDouble("price")
                 );
                 books.add(book);
             }
@@ -65,5 +64,18 @@ public class BookDAO {
             pstmt.executeUpdate();
         }
     }
-}
 
+    public boolean doesBookExist(int bookId) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM book WHERE bookid = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, bookId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        }
+        return false;
+    }
+
+}

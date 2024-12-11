@@ -1,13 +1,12 @@
 package dao;
 
-import model.BookAuthor;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.BookAuthor;
 
 public class BookAuthorDAO {
     private Connection conn;
@@ -21,6 +20,17 @@ public class BookAuthorDAO {
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, bookAuthor.getBookId());
             stmt.setInt(2, bookAuthor.getAuthorId());
+            stmt.executeUpdate();
+        }
+    }
+
+    public void updateBookAuthor(BookAuthor bookAuthor, int oldBookId, int oldAuthorId) throws SQLException {
+        String sql = "UPDATE bookauthor SET bookid = ?, authorid = ? WHERE bookid = ? AND authorid = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, bookAuthor.getBookId());
+            stmt.setInt(2, bookAuthor.getAuthorId());
+            stmt.setInt(3, oldBookId);
+            stmt.setInt(4, oldAuthorId);
             stmt.executeUpdate();
         }
     }

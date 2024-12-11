@@ -30,7 +30,7 @@ public class OrdersCLI {
             System.out.println("5. Back to Main Menu");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -56,7 +56,7 @@ public class OrdersCLI {
     private void addOrder() {
         System.out.print("Enter customer ID: ");
         int customerId = scanner.nextInt();
-        scanner.nextLine();  // Consume newline
+        scanner.nextLine();
 
         // Check if customer ID exists
         try {
@@ -73,7 +73,7 @@ public class OrdersCLI {
         String orderDate = scanner.nextLine();
         System.out.print("Enter total amount: ");
         double totalAmount = scanner.nextDouble();
-        scanner.nextLine();  // Consume newline
+        scanner.nextLine();
 
         Orders order = new Orders(customerId, java.sql.Date.valueOf(orderDate), totalAmount);
         try {
@@ -98,13 +98,11 @@ public class OrdersCLI {
     private void updateOrder() {
         System.out.print("Enter order ID to update: ");
         int orderId = scanner.nextInt();
-        scanner.nextLine();  // Consume newline
+        scanner.nextLine();
 
         System.out.print("Enter new customer ID: ");
         int customerId = scanner.nextInt();
-        scanner.nextLine();  // Consume newline
-
-        // Check if new customer ID exists
+        scanner.nextLine();
         try {
             if (!customerDAO.doesCustomerExist(customerId)) {
                 System.out.println("Customer ID does not exist. Please enter a valid customer ID.");
@@ -119,7 +117,7 @@ public class OrdersCLI {
         String orderDate = scanner.nextLine();
         System.out.print("Enter new total amount: ");
         double totalAmount = scanner.nextDouble();
-        scanner.nextLine();  // Consume newline
+        scanner.nextLine();
 
         Orders order = new Orders(customerId, java.sql.Date.valueOf(orderDate), totalAmount);
         try {
@@ -133,7 +131,7 @@ public class OrdersCLI {
     private void deleteOrder() {
         System.out.print("Enter order ID to delete: ");
         int orderId = scanner.nextInt();
-        scanner.nextLine();  // Consume newline
+        scanner.nextLine();
         try {
             orderDAO.deleteOrder(orderId);
             System.out.println("Order deleted successfully.");

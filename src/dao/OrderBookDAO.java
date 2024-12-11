@@ -1,13 +1,12 @@
 package dao;
 
-import model.OrderBook;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.OrderBook;
 
 public class OrderBookDAO {
     private Connection conn;
@@ -24,6 +23,18 @@ public class OrderBookDAO {
             stmt.executeUpdate();
         }
     }
+
+    public void updateOrderBook(OrderBook orderBook, int oldOrderId, int oldBookId) throws SQLException {
+        String sql = "UPDATE orderbook SET orderid = ?, bookid = ? WHERE orderid = ? AND bookid = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, orderBook.getOrderId());
+            stmt.setInt(2, orderBook.getBookId());
+            stmt.setInt(3, oldOrderId);
+            stmt.setInt(4, oldBookId);
+            stmt.executeUpdate();
+        }
+    }
+
 
     public List<OrderBook> readAllOrderBooks() throws SQLException {
         String sql = "SELECT * FROM orderbook";
