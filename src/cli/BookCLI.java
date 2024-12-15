@@ -9,8 +9,8 @@ import model.Book;
 
 public class BookCLI {
 
-    private Scanner scanner;
-    private BookDAO bookDAO;
+    private final Scanner scanner;
+    private final BookDAO bookDAO;
 
     public BookCLI(Connection conn) {
         scanner = new Scanner(System.in);
@@ -30,22 +30,14 @@ public class BookCLI {
             scanner.nextLine();
 
             switch (choice) {
-                case 1:
-                    addBook();
-                    break;
-                case 2:
-                    listBooks();
-                    break;
-                case 3:
-                    updateBook();
-                    break;
-                case 4:
-                    deleteBook();
-                    break;
-                case 5:
+                case 1 -> addBook();
+                case 2 -> listBooks();
+                case 3 -> updateBook();
+                case 4 -> deleteBook();
+                case 5 -> {
                     return;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+                }
+                default -> System.out.println("Invalid choice. Please try again.");
             }
         }
     }

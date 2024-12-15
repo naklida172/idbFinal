@@ -9,8 +9,8 @@ import model.Author;
 
 public class AuthorCLI {
 
-    private Scanner scanner;
-    private AuthorDAO authorDAO;
+    private final Scanner scanner;
+    private final AuthorDAO authorDAO;
 
     public AuthorCLI(Connection conn) {
         scanner = new Scanner(System.in);
@@ -30,22 +30,14 @@ public class AuthorCLI {
             scanner.nextLine();
 
             switch (choice) {
-                case 1:
-                    addAuthor();
-                    break;
-                case 2:
-                    listAuthors();
-                    break;
-                case 3:
-                    updateAuthor();
-                    break;
-                case 4:
-                    deleteAuthor();
-                    break;
-                case 5:
+                case 1 -> addAuthor();
+                case 2 -> listAuthors();
+                case 3 -> updateAuthor();
+                case 4 -> deleteAuthor();
+                case 5 -> {
                     return;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+                }
+                default -> System.out.println("Invalid choice. Please try again.");
             }
         }
     }

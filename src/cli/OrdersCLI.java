@@ -10,9 +10,9 @@ import model.Orders;
 
 public class OrdersCLI {
 
-    private Scanner scanner;
-    private OrdersDAO orderDAO;
-    private CustomerDAO customerDAO;
+    private final Scanner scanner;
+    private final OrdersDAO orderDAO;
+    private final CustomerDAO customerDAO;
 
     public OrdersCLI(Connection conn) {
         scanner = new Scanner(System.in);
@@ -33,22 +33,14 @@ public class OrdersCLI {
             scanner.nextLine();
 
             switch (choice) {
-                case 1:
-                    addOrder();
-                    break;
-                case 2:
-                    listOrders();
-                    break;
-                case 3:
-                    updateOrder();
-                    break;
-                case 4:
-                    deleteOrder();
-                    break;
-                case 5:
+                case 1 -> addOrder();
+                case 2 -> listOrders();
+                case 3 -> updateOrder();
+                case 4 -> deleteOrder();
+                case 5 -> {
                     return;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+                }
+                default -> System.out.println("Invalid choice. Please try again.");
             }
         }
     }

@@ -9,7 +9,7 @@ import java.util.List;
 import model.BookAuthor;
 
 public class BookAuthorDAO {
-    private Connection conn;
+    private final Connection conn;
 
     public BookAuthorDAO(Connection conn) {
         this.conn = conn;

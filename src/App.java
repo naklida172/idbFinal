@@ -20,7 +20,7 @@ public class App {
                 System.out.println("Failed to connect to the database.");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Failed to connect to the database.");
         }
     }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import model.Author;
 
 public class AuthorDAO {
-    private Connection conn;
+    private final Connection conn;
 
     public AuthorDAO(Connection conn) {
         this.conn = conn;

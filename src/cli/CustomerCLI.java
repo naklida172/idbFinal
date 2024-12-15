@@ -9,8 +9,8 @@ import model.Customer;
 
 public class CustomerCLI {
 
-    private Scanner scanner;
-    private CustomerDAO customerDAO;
+    private final Scanner scanner;
+    private final CustomerDAO customerDAO;
 
     public CustomerCLI(Connection conn) {
         scanner = new Scanner(System.in);
@@ -30,22 +30,14 @@ public class CustomerCLI {
             scanner.nextLine();
 
             switch (choice) {
-                case 1:
-                    addCustomer();
-                    break;
-                case 2:
-                    listCustomers();
-                    break;
-                case 3:
-                    updateCustomer();
-                    break;
-                case 4:
-                    deleteCustomer();
-                    break;
-                case 5:
+                case 1 -> addCustomer();
+                case 2 -> listCustomers();
+                case 3 -> updateCustomer();
+                case 4 -> deleteCustomer();
+                case 5 -> {
                     return;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+                }
+                default -> System.out.println("Invalid choice. Please try again.");
             }
         }
     }

@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 public class CLI {
 
-    private Scanner scanner;
-    private Connection conn;
+    private final Scanner scanner;
+    private final Connection conn;
 
     public CLI(Connection conn) {
         scanner = new Scanner(System.in);
@@ -29,29 +29,17 @@ public class CLI {
             scanner.nextLine();
 
             switch (choice) {
-                case 1:
-                    new BookCLI(conn).manageBooks();
-                    break;
-                case 2:
-                    new AuthorCLI(conn).manageAuthors();
-                    break;
-                case 3:
-                    new BookAuthorCLI(conn).manageBookAuthors();
-                    break;
-                case 4:
-                    new CustomerCLI(conn).manageCustomers();
-                    break;
-                case 5:
-                    new OrdersCLI(conn).manageOrders();
-                    break;
-                case 6:
-                    new OrderBookCLI(conn).manageOrderBooks();
-                    break;
-                case 7:
+                case 1 -> new BookCLI(conn).manageBooks();
+                case 2 -> new AuthorCLI(conn).manageAuthors();
+                case 3 -> new BookAuthorCLI(conn).manageBookAuthors();
+                case 4 -> new CustomerCLI(conn).manageCustomers();
+                case 5 -> new OrdersCLI(conn).manageOrders();
+                case 6 -> new OrderBookCLI(conn).manageOrderBooks();
+                case 7 -> {
                     System.out.println("Goodbye!");
                     return;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+                }
+                default -> System.out.println("Invalid choice. Please try again.");
             }
         }
     }

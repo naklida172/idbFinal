@@ -1,21 +1,20 @@
 package cli;
 
+import dao.AuthorDAO;
 import dao.BookAuthorDAO;
 import dao.BookDAO;
-import dao.AuthorDAO;
-import model.BookAuthor;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
+import model.BookAuthor;
 
 public class BookAuthorCLI {
 
-    private Scanner scanner;
-    private BookAuthorDAO bookAuthorDAO;
-    private BookDAO bookDAO;
-    private AuthorDAO authorDAO;
+    private final Scanner scanner;
+    private final BookAuthorDAO bookAuthorDAO;
+    private final BookDAO bookDAO;
+    private final AuthorDAO authorDAO;
 
     public BookAuthorCLI(Connection conn) {
         scanner = new Scanner(System.in);
@@ -37,22 +36,14 @@ public class BookAuthorCLI {
             scanner.nextLine();
 
             switch (choice) {
-                case 1:
-                    addBookAuthor();
-                    break;
-                case 2:
-                    listBookAuthors();
-                    break;
-                case 3:
-                    updateBookAuthor();
-                    break;
-                case 4:
-                    deleteBookAuthor();
-                    break;
-                case 5:
+                case 1 -> addBookAuthor();
+                case 2 -> listBookAuthors();
+                case 3 -> updateBookAuthor();
+                case 4 -> deleteBookAuthor();
+                case 5 -> {
                     return;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+                }
+                default -> System.out.println("Invalid choice. Please try again.");
             }
         }
     }

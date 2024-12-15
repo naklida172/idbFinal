@@ -6,7 +6,7 @@ import java.util.List;
 import model.Orders;
 
 public class OrdersDAO {
-    private Connection conn;
+    private final Connection conn;
 
     public OrdersDAO(Connection conn) {
         this.conn = conn;

@@ -7,7 +7,7 @@ import model.Book;
 
 public class BookDAO {
 
-    private Connection conn;
+    private final Connection conn;
 
     public BookDAO(Connection conn) {
         this.conn = conn;

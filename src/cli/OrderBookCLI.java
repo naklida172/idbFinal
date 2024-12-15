@@ -1,21 +1,20 @@
 package cli;
 
+import dao.BookDAO;
 import dao.OrderBookDAO;
 import dao.OrdersDAO;
-import dao.BookDAO;
-import model.OrderBook;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
+import model.OrderBook;
 
 public class OrderBookCLI {
 
-    private Scanner scanner;
-    private OrderBookDAO orderBookDAO;
-    private OrdersDAO orderDAO;
-    private BookDAO bookDAO;
+    private final Scanner scanner;
+    private final OrderBookDAO orderBookDAO;
+    private final OrdersDAO orderDAO;
+    private final BookDAO bookDAO;
 
     public OrderBookCLI(Connection conn) {
         scanner = new Scanner(System.in);
@@ -37,22 +36,14 @@ public class OrderBookCLI {
             scanner.nextLine();
 
             switch (choice) {
-                case 1:
-                    addOrderBook();
-                    break;
-                case 2:
-                    listOrderBooks();
-                    break;
-                case 3:
-                    updateOrderBook();
-                    break;
-                case 4:
-                    deleteOrderBook();
-                    break;
-                case 5:
+                case 1 -> addOrderBook();
+                case 2 -> listOrderBooks();
+                case 3 -> updateOrderBook();
+                case 4 -> deleteOrderBook();
+                case 5 -> {
                     return;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+                }
+                default -> System.out.println("Invalid choice. Please try again.");
             }
         }
     }
