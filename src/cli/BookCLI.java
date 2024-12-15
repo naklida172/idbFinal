@@ -57,9 +57,11 @@ public class BookCLI {
         String genre = scanner.nextLine();
         System.out.print("Enter book price: ");
         double price = scanner.nextDouble();
+        System.out.print("Enter book stock quantity: ");
+        int stock = scanner.nextInt();
         scanner.nextLine();
 
-        Book book = new Book(title, genre, price);
+        Book book = new Book(title, genre, price, stock);
         try {
             bookDAO.createBook(book);
 
@@ -91,9 +93,11 @@ public class BookCLI {
         String genre = scanner.nextLine();
         System.out.print("Enter new price: ");
         double price = scanner.nextDouble();
+        System.out.print("Enter book stock quantity: ");
+        int stock = scanner.nextInt();
         scanner.nextLine();
 
-        Book book = new Book(title, genre, price);
+        Book book = new Book(title, genre, price, stock);
         try {
             bookDAO.updateBook(book, bookId);
 

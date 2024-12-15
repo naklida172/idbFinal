@@ -6,6 +6,7 @@ public class Book {
     private String title;
     private String genre;
     private double price;
+    private int stock;
 
     // Getters and Setters
     public int getBookId() {
@@ -40,6 +41,14 @@ public class Book {
         this.price = price;
     }
 
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -47,21 +56,23 @@ public class Book {
                 ", title='" + title + '\'' +
                 ", genre='" + genre + '\'' +
                 ", price=" + price +
+                ", stock=" + stock +
                 '}';
     }
 
     // Constructors
-    public Book( String title, String genre, double price) {
+    public Book( String title, String genre, double price,int stock) {
         this.title = title;
         this.genre = genre;
         this.price = price;
     }
 
-    public Book(int bookID, String title, String genre, double price) {
+    public Book(int bookID, String title, String genre, double price, int stock) {
         this.bookId=bookID;
         this.title = title;
         this.genre = genre;
         this.price = price;
+        this.stock = stock;
     }
     
 
