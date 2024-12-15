@@ -28,7 +28,7 @@ public class OrderBook {
 
     @Override
     public String toString() {
-        return "BookAuthor{" +
+        return "BookOrder{" +
                 "book Id=" + bookId +
                 ", order Id=" + orderId +
                 '}';
