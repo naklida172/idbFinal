@@ -3,6 +3,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "final_d2a2889e"
+        },
+        {
+            "type": "java",
             "name": "CLI",
             "request": "launch",
             "mainClass": "cli.CLI",
@@ -13,7 +20,7 @@
             "name": "MainApp",
             "request": "launch",
             "mainClass": "ui.MainApp",
-            "projectName": "test_a3b8f86a",
+            "projectName": "test_a3b8f86a"
         },
         {
             "type": "java",

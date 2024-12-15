@@ -65,6 +65,7 @@ public class Book {
         this.title = title;
         this.genre = genre;
         this.price = price;
+        this.stock= stock;
     }
 
     public Book(int bookID, String title, String genre, double price, int stock) {
